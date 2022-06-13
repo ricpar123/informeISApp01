@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/estilos.css">
+   
+    <link rel="stylesheet" href="../lib/pluggins/mdtoast.min.css">
+    <title>Informe de Servicio</title>
+</head>
+<body>
+
+    <h2>Informe de Servicios</h2>
+
+    <form id="formulario">
+
+        <div class="six-columns">
+            <div class="fields">
+                <label for='tecnico'>Seleccionar tecnico (*)</label>
+                <select id="tecnico" class="sel" multiple></select>
+            </div>
+            <div class="fields">
+                <label for='cliente'>Seleccionar cliente (*)</label>
+                <select id="cliente" class="sel"></select>
+            </div> 
+            <div class="fields"> 
+                <label for='equipo'>Seleccionar equipo (*)</label>
+                <select id="equipo" class="sel"></select>
+
+            </div>
+
+        </div>
+
+        <div class="six-columns">
+            <div class="fields">
+                <label for='descripcion'>Descripcion</label>
+                <input type="text" id="descripcion" size="30">
+            </div>
+            <div class="fields">
+                <label for='marca'>Marca</label>
+                <input type="text" id="marca" size="10">
+            </div>
+            <div class="fields">
+                <label for='modelo'>Modelo</label>
+                <input type="text" id="modelo" size="10">
+            </div>
+            <div class="fields">
+                <label for='serie'>Serie</label>
+                <input type="text" id="serie" size="10">
+            </div>
+        </div>
+
+        <div class="six-columns">
+            <div class="fields">
+                <label for='inicio'>Fecha Inicio (*)</label>
+                <input type="datetime-local" id="inicio" size="20">
+            </div>
+            <div class="fields">
+                <label for='fin'>Fecha Termino (*)</label>
+                <input type="datetime-local" id="fin" size="20">
+            </div>
+            <div class="fields">
+                <label for='normales'>Horas Normales</label>
+                <input type="text" id="normales" size="10">
+            </div>
+            
+        </div>
+
+        <div class="six-columns">
+            <div class="fields">
+                <label for='lab'>Horas Lab</label>
+                <input type="time" id="lab" size="10" value="00:00:00">
+            </div>
+            <div class="fields">
+                <label for='viaje'>Horas Viaje</label>
+                <input type="time" id="viaje" size="10" value="00:00:00">
+            </div>
+            <div class="fields">
+                <label for='totales'>Horas Totales</label>
+                <input type="text" id="totales" size="10">
+            </div>
+            
+        </div>
+
+        <div class="six-columns">
+            <div class="fields">
+                <label for='motivo'>Motivo de la Visita (*)</label>
+                <input type="text" id="motivo" size="50" value=''>
+            </div>
+        </div>
+
+        <div class="six-columns">
+            <p>Tipo de trabajo (*)</p>
+            <div class="fields">
+                <label for='montaje'>Montaje </label>
+                <input type="radio" id="montaje" name="trabajo" value='montaje'>
+            </div>
+            <div class="fields">
+                <label for='garantia'>Garantia</label>
+                <input type="radio" id="garantia" name="trabajo" value='garantia'>
+            </div>
+            <div class="fields">
+                <label for='contrato'>Contrato</label>
+                <input type="radio" id="contrato" name="trabajo" value='contrato'>
+            </div>
+            <div class="fields">
+                <label for='facturar'>A Facturar</label>
+                <input type="radio" id="facturar" name="trabajo" value='a facturar'>
+            </div>
+            <div class="fields">
+                <label for='varios'>Varios</label>
+                <input type="radio" id="varios" name="trabajo" value='varios'>
+            </div>
+            <div class="fields">
+                <p>Oferta (*)</p>
+                <label for='si'>Si</label>
+                <input type="radio" id="si" name="presu" value='si'>
+                <label for='no'>No</label>
+                <input type="radio" id="no" name="presu" value='no'>
+            </div>
+        </div>
+
+        <div class="fields">
+            <label for="destrabajo">Descripcion de los trabajos realizados (*)</label>
+            <textarea id="destrabajo"></textarea>
+        </div>
+
+
+        <div class="fields">
+            <label for="obs">Observaciones</label>
+            <textarea id="obs"></textarea>
+        </div>
+
+        <div class="six-columns">
+            <div class="fields">
+                <label for='recibido'>Trabajo recibido por</label>
+                <input type="text" id="recibido" value=''>
+            </div>
+            <div class="fields">
+                <label for='ci'>CI nro</label>
+                <input type="text" id="ci" value=''>
+            </div>
+            <div class="fields">
+                <label for='fecha'>Fecha (*)</label>
+                <input type="date" id="fecha"  value=''>
+            </div>
+            
+        </div>
+
+        <div class="fields">
+            <label for="firma">Firma del Cliente (*)</label>
+            <input id="firma" class="wrapper" type="hidden">
+                <canvas id="signature" width="200" height="350"></canvas>
+            
+        </div>
+
+        <div class="btn">
+			<button type="submit" >Enviar</button>
+		</div>
+
+
+
+
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.5/signature_pad.min.js"></script>
+    <script src="/lib/pouchdb/pouchdb.min.js"></script>
+  
+    
+    <script src="../js/auth.js"></script>
+    <script src="../js/informe.js"></script>
+    
+</body>
+</html>

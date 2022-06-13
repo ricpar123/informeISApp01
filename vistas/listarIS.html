@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <title>Listar Informes de Servicio</title>
+    <style type="text/css">
+
+    h2{
+        font-style: italic;
+        color: blue;
+        text-align: center;
+
+    }
+        
+        .contenedor{
+            height: 110px;
+            width: 90%;
+            float: left;
+            margin: 30px;
+            position: relative;
+            border: 3px solid greenyellow;
+            background-color: #dedede;
+           
+
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 50px 150px 50px 150px 200px;
+            grid-template-rows: repeat(2, 1fr);
+            grid-gap: 10px;
+        
+            
+
+        }
+
+        #inicio{
+            background: #ff8000;
+           cursor: pointer;
+            
+        }
+        #fin{
+            background: #e9b683;
+            cursor: pointer;
+        }
+        #cliente{
+            background: #83e9d8;
+            
+        }
+        
+        
+        #filtro{
+            background: #72f04c;
+            grid-column: 4;
+            grid-row: 2/4;
+            cursor: pointer;
+        }
+
+        .selequipo {
+
+            background: #1baea990;
+            height: 40px;
+            width: 260px;
+            margin-left: 100px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 30px;
+            font-size: 12px;
+            color: rgb(66, 62, 62);
+        }
+
+        a{
+        
+        padding: 20px;
+        cursor: pointer;
+        height: 10px;
+        width: 10px;
+        display: inline-block;
+     
+        }
+
+        span {
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        white-space: nowrap;
+        width: 0;
+        }
+
+     a:hover span {
+        overflow: visible;
+        width: auto;
+        
+    }
+
+
+       
+
+    </style>
+
+</head>
+<body>
+    <div><h2>Listado de Informes de Servicio</h2></div>
+
+    <div class="contenedor">
+        
+            <form id="form">
+                <label for="inicio">Inicio</label>
+                <input type="date" id="inicio" name="inicio" value="inicio">
+                <label for="fin">Termino</label>
+                <input type="date" id="fin" name="fin" value="fin">
+                <select id="clientes" class="selequipo"></select>
+                <input id="filtro" type="submit" class="btn btn-input" value="Filtrar">
+                
+            </form>
+      
+        
+    </div>
+
+    <div id="data-list"></div>
+
+   
+   
+    <script  src= "../js/listarInformes.js"></script> 
+</body>
+</html>
