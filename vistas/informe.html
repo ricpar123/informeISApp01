@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/estilos.css">
    
-    <link rel="stylesheet" href="../lib/pluggins/mdtoast.min.css">
+   
     <title>Informe de Servicio</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
         <div class="six-columns">
             <div class="fields">
                 <label for='tecnico'>Seleccionar tecnico (*)</label>
-                <select id="tecnico" class="sel" multiple></select>
+                <select id="tecnico" class="sel" multiple="multiple" ></select>
             </div>
             <div class="fields">
                 <label for='cliente'>Seleccionar cliente (*)</label>
@@ -86,7 +86,7 @@
         <div class="six-columns">
             <div class="fields">
                 <label for='motivo'>Motivo de la Visita (*)</label>
-                <input type="text" id="motivo" size="50" value=''>
+                <input type="text" id="motivo" size="30" value=''>
             </div>
         </div>
 
@@ -148,12 +148,24 @@
             
         </div>
 
-        <div class="fields">
+        <div>
             <label for="firma">Firma del Cliente (*)</label>
             <input id="firma" class="wrapper" type="hidden">
-                <canvas id="signature" width="200" height="350"></canvas>
-            
         </div>
+        <div id="signature1" class="signature">
+            <canvas></canvas>
+        </div>
+        <button type="button" onclick="signatureClear1()">Borrar Firma de Cliente</button>
+
+
+        <div>
+            <label for="firmaT">Firma del Tecnico (*)</label>
+            <input id="firmaT" class="wrapper" type="hidden">
+        </div>
+        <div id="signature2" class="signature">
+            <canvas></canvas>
+        </div>
+        <button type="button" onclick="signatureClear2()">Borrar Firma de Tecnico</button>
 
         <div class="btn">
 			<button type="submit" >Enviar</button>
@@ -167,7 +179,7 @@
     <script src="/lib/pouchdb/pouchdb.min.js"></script>
   
     
-    <script src="../js/auth.js"></script>
+   <!-- <script src="../js/auth.js"></script>-->
     <script src="../js/informe.js"></script>
     
 </body>

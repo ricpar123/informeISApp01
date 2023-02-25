@@ -19,7 +19,12 @@ Notification.requestPermission(function(status) {
 
 async function fetchUsuarios(){
    
-    const res = await fetch('http://localhost:8080/usuarios/tabla');
+    const res = await fetch('http://localhost:8080/usuarios/tabla', 
+        {
+            method: "GET",
+            headers: {"auth": "auth"}
+            });
+    
 
    
     
@@ -66,7 +71,12 @@ fetchUsuarios();
 
 
 async function fetchClientes(){
-    const res = await fetch('http://localhost:8080/clientes');
+    const res = await fetch('http://localhost:8080/clientes', 
+    { method: "GET",
+    headers: {"auth": "auth"}
+    });
+    
+    
     if(!res.ok){
         const msg = `error en fetchClientes:, ${res.status}`;
         throw new Error(msg);
@@ -183,20 +193,6 @@ async function fetchClientes(){
                 
                 
     }
-
-     
-          
-  
-   
-    
-    
-    
-    
-        
-
-
-
-
 
 var fechaInicio = '';
 var horaInicio = '';
@@ -329,20 +325,65 @@ if(hvj.value == '00:00:00'){
     hvj = '00:00:00';
 }
 
-var canvas = document.getElementById("signature");
 
-       function resizeCanvas() {
+var wrapper1 = document.getElementById("signature1"),
+    canvas1 = wrapper1.querySelector("canvas"),
+    signaturePad1;
+
+var wrapper2 = document.getElementById("signature2"),
+    canvas2 = wrapper2.querySelector("canvas"),
+    signaturePad2;
+
+    function resizeCanvas(canvas) {
+        var ratio = Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext("2d").scale(ratio, ratio);
+    }
+
+    resizeCanvas(canvas1);
+    signaturePad1 = new SignaturePad(canvas1);
+
+   resizeCanvas(canvas2);
+   signaturePad2 = new SignaturePad(canvas2);
+
+
+
+
+
+
+/*
+var canvasC = document.getElementById("signature");
+
+       function resizeCanvasC() {
            var ratio = Math.max(window.devicePixelRatio || 1, 1);
-           canvas.width = canvas.offsetWidth * ratio;
-           canvas.height = canvas.offsetHeight * ratio;
-           canvas.getContext("2d").scale(ratio, ratio);
+           canvasC.width = canvas.offsetWidth * ratio;
+           canvasC.height = canvas.offsetHeight * ratio;
+           canvasC.getContext("2d").scale(ratio, ratio);
        }
-       window.onresize = resizeCanvas;
-       resizeCanvas();
+       window.onresize = resizeCanvasC;
+       resizeCanvasC();
 
-       var signaturePad = new SignaturePad(canvas, {
+var canvasT = document.getElementById("signatureT");
+
+    function resizeCanvasT() {
+           var ratio = Math.max(window.devicePixelRatio || 1, 1);
+           canvasT.width = canvasT.offsetWidth * ratio;
+           canvasT.height = canvasT.offsetHeight * ratio;
+           canvasT.getContext("2d").scale(ratio, ratio);
+       }
+       window.onresize = resizeCanvasT;
+       resizeCanvasT();
+
+       var signaturePadC = new SignaturePad(canvasC, {
         backgroundColor: 'rgb(250,250,250)'
        });
+
+       var signaturePadT = new SignaturePad(canvasT, {
+        backgroundColor: 'rgb(250,250,250)'
+       });
+*/
+
 
 var formulario = document.getElementById("formulario");
 
@@ -366,6 +407,7 @@ let recibido = '';
 let ci = '';
 let fecha = '';
 let firma = '';
+let firmaT = '';
 
 
 
@@ -390,12 +432,13 @@ let firma = '';
         }
         
         var tec = document.getElementById("tecnico").value;
-        
+        //console.log('Tecnico/s:', tec);
         motivo = document.getElementById("motivo").value;
        
         
         servicio = document.getElementById("destrabajo").value;
         firma = document.getElementById("firma");
+        firmaT = document.getElementById("firmaT");
         fecha = document.getElementById("fecha").value;
         equipo = document.getElementById("equipo").value;
         obs = document.getElementById("obs").value;
@@ -407,8 +450,8 @@ let firma = '';
         
         if(tec == 0 || cliente == 0 || motivo == 0 ||  
              fechaInicio == 0 || fechaFin == 0 || servicio == 0  
-            || fecha == 0 || equipo == 0 || signaturePad.isEmpty() || 
-            tipoTrabajo == 0 || presupuesto == 0  ){
+            || fecha == 0 || equipo == 0 || signaturePad1.isEmpty() || 
+            tipoTrabajo == 0 || presupuesto == 0 || signaturePad2.isEmpty()  ){
             e.preventDefault();
             alert('Error, los campos marcados con * deben ser completados');
             return;
@@ -425,7 +468,7 @@ let firma = '';
             }
       
         
-            //console.log('tecnico: ', tecnico);
+            console.log('tecnico/s: ', tecnico);
      descripcion = document.getElementById("descripcion").value;
      marca = document.getElementById("marca").value; 
      modelo = document.getElementById("modelo").value;
@@ -434,10 +477,16 @@ let firma = '';
 
 
 
-    let base64 = signaturePad.toDataURL('image/png').split(';base64,')[1];
-    firma = base64;
+     let base64 = signaturePad1.toDataURL('image/png').split(';base64,')[1];
+     firma = base64;
+ 
+     let base64T = signaturePad2.toDataURL('image/png').split(';base64,')[1];
+     firmaT = base64T;
     //console.log(base64);
 
+
+   
+    
     console.log('cliente seleccionado:', cliente);
     console.log('Motivo de la visita.', motivo);
     horasNormales = hnormales;
@@ -449,10 +498,10 @@ let firma = '';
     let _body = {tecnico, cliente, descripcion, marca, modelo, serie, 
                 motivo, tipoTrabajo, presupuesto, fechaInicio, horaInicio, 
                 fechaFin, horaFin, horasNormales, horasLab, horasViaje, 
-                horasTotales, servicio, obs, recibido, ci, firma, fecha,
-                email1, email2, email3, email4 };
+                horasTotales, servicio, obs, recibido, ci, firma, firmaT, 
+                fecha, email1, email2, email3, email4 };
 
-   // console.log('datos a enviar: ', _body);
+    console.log('datos a enviar: ', _body);
     //enviar el formulario al service worker
    
     var form = { 'formData' : _body };
@@ -489,10 +538,20 @@ let firma = '';
        
     }
 
+    function signatureClear1() {
+        console.log('clear signature1');
+        signaturePad1.clear();
+      }
+
+      function signatureClear2() {
+        console.log('clear signature2');
+        signaturePad2.clear();
+      }
+
     formulario.addEventListener('submit', validar);
 
 // Detectar cambios de conexión
-
+/*
 
 function isOnline() {
 
@@ -514,3 +573,4 @@ window.addEventListener('offline', isOnline );
 
 isOnline();
 
+*/

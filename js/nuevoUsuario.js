@@ -31,7 +31,8 @@ let datos = [];
                 fetch('http://localhost:8080/usuarios/reg', {
                 method: "POST",
                 body: JSON.stringify(_body),
-                headers: {"Content-type": "application/json"}
+                headers: {"Content-type": "application/json", 
+                            "auth": "auth"}
             })
             .then(response => response.json())
             .then ((data) => {

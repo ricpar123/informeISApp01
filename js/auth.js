@@ -4,14 +4,6 @@ let nombreUsuario = '';
 let claveUsuario = '';
 let rolUsuario = '';
 
-const channel1 = new BroadcastChannel('canal1');
- 
-
-
-
-
-
-
 function validar(e) {
         var nombre = document.getElementById("nombre"),
             clave = document.getElementById("clave");
@@ -49,7 +41,7 @@ function validar(e) {
             let _body = {userid: nombreUsuario, clave: claveUsuario};
            console.log('body ', _body);
 
-           fetch('http://localhost:8080/usuarios/log', {
+           fetch('https://serveringroup.herokuapp.com/usuarios/log', {
                 method: "POST",
                 body: JSON.stringify(_body),
                 headers: {"Content-Type": "application/json"}
@@ -117,7 +109,7 @@ function validar(e) {
 
 formulario.addEventListener("submit", validar);
 
-
+/*
 function isOnline() {
 
     if ( navigator.onLine ) {
@@ -138,6 +130,6 @@ window.addEventListener('offline', isOnline );
 
 isOnline();
 
-
+*/
 
 

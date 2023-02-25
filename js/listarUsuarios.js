@@ -5,9 +5,14 @@ var lista =[];
     
  async function fetchUsuarios(){
 
-    const res = await fetch('http://localhost:8080/usuarios/tabla');
+    const res = await fetch('http://localhost:8080/usuarios/tabla', {
+        method: "GET",
+        headers: {"auth": "auth"}
+        });
+  
 
      
+    
     if(!res.ok){
         const msg = `error en fetchUsuarios:, ${res.status}`;
         throw new Error(msg);
@@ -116,7 +121,8 @@ function Borrar(idr){
 
             fetch(`http://localhost:8080/usuarios/${id}`, {
                 method: "DELETE",
-                headers: {"Content-type": "application/json"}
+                headers: {"Content-type": "application/json"
+                            }
             })
                 .then(response => response.json())
                 .then ((data) => {

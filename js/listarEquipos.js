@@ -5,7 +5,11 @@ var equipos=[];
 
 async function fetchClientes(){
    
-    const res = await fetch('http://localhost:8080/clientes');
+    const res = await fetch('http://localhost:8080/clientes', 
+    {
+    method: "GET",
+    headers: {"auth": "auth"}
+    });
 
    
     
